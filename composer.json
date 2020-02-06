@@ -3,7 +3,7 @@
     "description": "Package for laravel to blacklist email bounce using AWS SES.",
     "type": "package",
     "require": {
-        "php": "^7.2",
+        "php": "^7.2"
     },
     "license": "MIT",
     "authors": [
