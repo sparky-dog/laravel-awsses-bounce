@@ -1,6 +1,6 @@
 {
     "name": "joelbb/laravel-awsses-bounce",
-    "description": "Package for laravel to blacklist email bounce using AWS SES.",
+    "description": "Package for laravel to blacklist email bounce on AWS SES. Prevents laravel from sending email to a blacklisted email address. Minimize bounce count on AWS SES.",
     "type": "package",
     "require": {
         "php": "^7.2"
