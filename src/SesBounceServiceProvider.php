@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
 class SesBounceServiceProvider extends ServiceProvider
 {
-    protected $defer = true;
+    protected $defer = false;
 
     /**
      * Bootstrap the application events.
@@ -18,6 +18,7 @@ class SesBounceServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        
         // Load view
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'SesBounce');
 

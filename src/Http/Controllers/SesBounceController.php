@@ -7,6 +7,12 @@ use Illuminate\Support\Facades\Mail;
 
 use Fligno\SesBounce\Models\AwsBouceList;
 use Fligno\SesBounce\Mail\TestMail;
+use Illuminate\Support\Facades\Log;
+
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\BadResponseException;
 
 class SesBounceController extends Controller
 {
@@ -44,16 +50,45 @@ class SesBounceController extends Controller
     public function store(Request $_request)
     {
         $request = ($_request->all() == null ?  json_decode($_request->getContent(), true) : $_request->all());
-
-        if (null !== @$request['mail']['destination'])
+        $data=null;
+        $statusCode = 200;
+        
+        if (null !== @$request['mail']['destination'] )
         {
             $bounce = AwsBouceList::firstOrNew(['email' => $request['mail']['destination']]);
             $bounce->email = $request['mail']['destination'][0];
             $bounce->source_ip = $request['mail']['sourceIp'];
             $bounce->save();
+            $statusCode = 201;
+            $data['status'] = 'Created'; 
         }
-        $data['status'] = 'Ok'; 
-        $statusCode = 200;
+        
+        if (@$request['Type'] == "SubscriptionConfirmation" )
+        {
+            Log::info("AWS SES Subscription Link:" . $request['SubscribeURL']);
+            $headers = [
+                'headers' => [
+                     'Accept' => 'application/json',
+                ]
+            ];
+            $client = new Client(['base_uri' => $request['SubscribeURL']]);
+
+            try {
+                $response  = $client->request('GET');
+                $statusCode = $response->getStatusCode();
+            }catch(ClientException $e) {
+                $response = $e->getResponse();
+                $statusCode = $response->getStatusCode();
+            }catch(ConnectException $e) {
+                $response = $e->getResponse();
+                $statusCode = $response->getStatusCode();
+            }catch(BadResponseException $e) {
+                $response = $e->getResponse();
+                $statusCode = $response->getStatusCode();
+            }
+
+            $data['status'] = 'SubscribeURL: '.$statusCode;
+        }
 
         return response()->json($data, $statusCode, array(), JSON_PRETTY_PRINT);
     }
