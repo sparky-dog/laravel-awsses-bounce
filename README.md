@@ -14,14 +14,15 @@ POST awsbounce/send - accepts: application/json , {"email": "emailrecipient"}
 ```
 composer require joelbb/laravel-awsses-bounce
 ```
-<<<<<<< HEAD
 
-#### 2. Publish resource file
-
+#### 2. Run migrate
 ```
-php artisan vendor:publish --tag=awsses --force
+php artisan migrate
 ```
 
-This will publish 
-=======
->>>>>>> abb8de9893f0d4afe0db456a20be8d6269c2a7dc
+this will create the blacklist table. 
+
+
+
+
+
