@@ -26,7 +26,7 @@ class SesBounceController extends Controller
     {
         $request = ($_request->all() == null ?  json_decode($_request->getContent(), true) : $_request->all());
 
-        if (null !== @$request['email'])
+        if (null !== @$request['email'] && env('APP_ENV') != 'production' )
         {
             Mail::to($request['email'])->send(new TestMail());        
             $data['status'] = 'Ok';
