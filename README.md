@@ -23,6 +23,16 @@ php artisan migrate
 this will create the blacklist table. 
 
 
+#### How to use.
+The package has 2 routes:
 
+- Accepts: application/json, form-data: This where aws will post the bounce notification. this will auto confirm the notification subscription in AWS SES Bounce once it's added as an endpoint.
+```
+POST api/awsbounce 
+```
+- Accepts: aplication/json : This is where the user can test if an email can still be sent if it's on the blacklist. Only works if the APP_ENV is not production.
+```
+POST api/awsbounce/send
+```
 
 
