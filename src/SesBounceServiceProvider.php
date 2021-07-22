@@ -5,7 +5,6 @@ namespace Fligno\SesBounce;
 use Illuminate\Support\ServiceProvider;
 use Fligno\SesBounce\Providers\RouteServiceProvider;
 use Fligno\SesBounce\Providers\EmailEventServiceProvider;
-use Illuminate\Database\Eloquent\Factory as EloquentFactory;
 
 class SesBounceServiceProvider extends ServiceProvider
 {
@@ -24,9 +23,6 @@ class SesBounceServiceProvider extends ServiceProvider
 
         // Load migrations
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
-
-        // Load factories
-        $this->registerEloquentFactoriesFrom(__DIR__ . '/database/factories');
     }
 
     /**
@@ -46,8 +42,4 @@ class SesBounceServiceProvider extends ServiceProvider
      * @param  string  $path
      * @return void
      */
-    protected function registerEloquentFactoriesFrom($path)
-    {
-        $this->app->make(EloquentFactory::class)->load($path);
-    }
 }
