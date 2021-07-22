@@ -41,6 +41,13 @@ class SesBounceController extends Controller
         return response()->json($data, $statusCode, array(), JSON_PRETTY_PRINT);
     }
 
+    public function get(){
+        $emails = AwsBouceList::all();
+
+
+        return response([$emails]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *

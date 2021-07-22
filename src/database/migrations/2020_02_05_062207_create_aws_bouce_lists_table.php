@@ -17,6 +17,7 @@ class CreateAwsBouceListsTable extends Migration
             $table->bigIncrements('id');
             $table->string('email');
             $table->string('source_ip');
+            $table->enum('status', ['whitelist', 'blacklist']);
             $table->timestamps();
         });
     }
