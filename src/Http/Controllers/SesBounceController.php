@@ -3,6 +3,7 @@ namespace Fligno\SesBounce\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 use Fligno\SesBounce\Models\AwsBouceList;
@@ -46,6 +47,16 @@ class SesBounceController extends Controller
 
 
         return response([$emails]);
+    }
+
+    public function edit(Request $request){
+        // grab the email
+        $email = AwsBouceList::query()->where('email', $request->email)->first();
+
+        $affected_rows = DB::table('aws_bouce_lists')->where('email', $request->email)
+            ->update(['status'=>$request->status]);
+
+        return response([$email->refresh()]);
     }
 
     /**
