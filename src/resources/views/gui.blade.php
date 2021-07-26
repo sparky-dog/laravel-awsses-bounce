@@ -15,16 +15,14 @@
   <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
   <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
 
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/main.css">
-
   <meta name="theme-color" content="#fafafa">
 
 </head>
 
 <body>
+  <h1>Laravel ReactJS Boilerplate</h1>
   <div id="root" class="container"> </div>
-  <script src="js/src/Main.js"></script>
+  <script src="{{asset('js/src/Main.js')}}"></script>
 </body>
 
 </html>

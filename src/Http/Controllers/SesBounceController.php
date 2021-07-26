@@ -1,6 +1,7 @@
 <?php
 namespace Fligno\SesBounce\Http\Controllers;
 use App\Http\Controllers\Controller;
+use Carbon\Traits\Test;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
@@ -14,22 +15,27 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\BadResponseException;
-
+use Tests\TestCase;
+use function PHPUnit\Framework\assertCount;
 class SesBounceController extends Controller
 {
+
     /**
      * Send Test Email
      * @param \Illuminate\Http\Request  $request
      *  email:String
      * @return \Illuminate\Http\Response
      */
+
+
     public function send(Request $_request)
     {
         $request = ($_request->all() == null ?  json_decode($_request->getContent(), true) : $_request->all());
 
-
         // check if API is on production
         if (env('APP_ENV') == 'local' ) return response(["status"=>"App in production"], 422);
+
+        \Tests\TestCase::assertArrayHasKey('email', $_request, 'Request Data should not be empty');
 
         if ($_request->email)
         {
@@ -37,27 +43,24 @@ class SesBounceController extends Controller
             $data['status'] = 'Ok';
             $statusCode = 200;
         }
-        else
-        {       
-            $data['status'] = 'Invalid Request. Email required!';
-            $statusCode = 400;
 
-        }
+        \Tests\TestCase::assertNotNull($data, 'Response Data should not be empty');
         return response()->json($data, $statusCode, array(), JSON_PRETTY_PRINT);
     }
 
     public function get(){
         $emails = AwsBouceList::all();
+        \Tests\TestCase::assertNotNull($emails, 'Table must not be empty');
         return response($emails);
     }
 
     public function edit(Request $request){
         // grab the email
-        $email = AwsBouceList::all();
-
+        $email = AwsBouceList::query()->find($request->id)->first();
+        \Tests\TestCase::assertNotNull($email, 'Request Data should not be null');
         //Block or Unblock Complaints/Email
         $affected_rows = DB::table('aws_bouce_lists')->where('id', $request->id)->delete();
-
+        \Tests\TestCase::assertCount(1, $affected_rows, 'Must return atleast 1 affected row');
         return response([$email]);
     }
 
