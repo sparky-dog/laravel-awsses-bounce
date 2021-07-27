@@ -1,6 +1,7 @@
 <?php
 namespace Fligno\SesBounce\Http\Controllers;
 use App\Http\Controllers\Controller;
+use Carbon\Traits\Test;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
@@ -19,12 +20,14 @@ use Fligno\SesBounce\Traits\Sendable;
 
 class SesBounceController extends Controller
 {
+
     /**
      * Send Test Email
      * @param \Illuminate\Http\Request  $request
      *  email:String
      * @return \Illuminate\Http\Response
      */
+    
     public function send(Request $_request)
     {
         $request = ($_request->all() == null ?  json_decode($_request->getContent(), true) : $_request->all());
@@ -41,7 +44,6 @@ class SesBounceController extends Controller
             $statusCode = 200;
         }
         return response($data);
-
     }
 
     public function get(){
