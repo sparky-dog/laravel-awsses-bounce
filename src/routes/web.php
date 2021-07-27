@@ -1,4 +1,8 @@
 <?php
-Route::get('SesBounce', function(){
+Route::get('/welcome', function(){
     return view('SesBounce::welcome');
+});
+
+Route::get('/gui', function(){
+    return view('SesBounce::gui');
 });
