@@ -3,7 +3,7 @@
     "description": "Package for laravel to blacklist email bounce on AWS SES. Prevents laravel from sending email to a blacklisted email address. Minimize bounce count on AWS SES.",
     "type": "package",
     "require": {
-        "php": "^7.2"
+        "php": "^8.0|^7.2"
     },
     "license": "MIT",
     "authors": [
@@ -26,5 +26,8 @@
     },
 
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    }
 }

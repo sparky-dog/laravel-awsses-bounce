@@ -29,6 +29,6 @@ class TestMail extends Mailable
     public function build()
     {
         return $this->view('SesBounce::testmail')
-        ->subject('Test Mail');;
+        ->subject('Test Mail');
     }
 }

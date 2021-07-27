@@ -1,6 +1,7 @@
 <?php
 namespace Fligno\SesBounce\Http\Controllers;
 use App\Http\Controllers\Controller;
+use Carbon\Traits\Test;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
@@ -15,35 +16,34 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\BadResponseException;
 
+use Fligno\SesBounce\Traits\Sendable;
+
 class SesBounceController extends Controller
 {
+
     /**
      * Send Test Email
      * @param \Illuminate\Http\Request  $request
      *  email:String
      * @return \Illuminate\Http\Response
      */
+    
     public function send(Request $_request)
     {
         $request = ($_request->all() == null ?  json_decode($_request->getContent(), true) : $_request->all());
 
-
         // check if API is on production
         if (env('APP_ENV') == 'local' ) return response(["status"=>"App in production"], 422);
 
-        if ($_request->email)
-        {
-            Mail::to($request['email'])->send(new TestMail());        
-            $data['status'] = 'Ok';
+        if($request){
+            Mail::to($request['email'])->send(new TestMail());
+            $data['status'] = "Ok";
+            $statusCode = 200;
+        }else{
+            $data['status'] = "Empty Request";
             $statusCode = 200;
         }
-        else
-        {       
-            $data['status'] = 'Invalid Request. Email required!';
-            $statusCode = 400;
-
-        }
-        return response()->json($data, $statusCode, array(), JSON_PRETTY_PRINT);
+        return response($data);
     }
 
     public function get(){
@@ -53,11 +53,9 @@ class SesBounceController extends Controller
 
     public function edit(Request $request){
         // grab the email
-        $email = AwsBouceList::all();
-
+        $email = AwsBouceList::query()->find($request->id)->first();
         //Block or Unblock Complaints/Email
         $affected_rows = DB::table('aws_bouce_lists')->where('id', $request->id)->delete();
-
         return response([$email]);
     }
 

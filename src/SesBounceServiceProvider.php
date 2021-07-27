@@ -20,12 +20,15 @@ class SesBounceServiceProvider extends ServiceProvider
         
         // Load view
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'SesBounce');
-        $this->loadViewsFrom(__DIR__ . '/resources/gui', 'SessGUI');
 
         // Load migrations
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
-//        $this->load
+        //Load the views
+        $this->publishes([
+            __DIR__.'/resources/js' => resource_path('/js')
+
+            ]);
     }
 
     /**
