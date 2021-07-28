@@ -27,7 +27,7 @@ class SesBounceController extends Controller
      *  email:String
      * @return \Illuminate\Http\Response
      */
-    
+
     public function send(Request $_request)
     {
         $request = ($_request->all() == null ?  json_decode($_request->getContent(), true) : $_request->all());

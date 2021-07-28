@@ -26,9 +26,12 @@ class SesBounceServiceProvider extends ServiceProvider
 
         //Load the views
         $this->publishes([
-            __DIR__.'/resources/js' => resource_path('/js')
-
-            ]);
+            __DIR__.'/resources/js' => resource_path('/js'),
+            __DIR__.'/resources/views/gui.blade.php' => resource_path('/views/gui.blade.php'), 
+            __DIR__ . '/resources/package.json' => base_path('/package.json'),
+            __DIR__ . '/resources/webpack.mix.js' => base_path('/webpack.mix.js'),
+            ]
+            , 'sesbounce');
     }
 
     /**
@@ -42,10 +45,4 @@ class SesBounceServiceProvider extends ServiceProvider
         $this->app->register(EmailEventServiceProvider::class);
     }
 
-    /**
-     * Register factories.
-     *
-     * @param  string  $path
-     * @return void
-     */
 }
