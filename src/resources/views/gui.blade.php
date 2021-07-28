@@ -22,7 +22,7 @@
 <body>
   <h1>Laravel ReactJS Boilerplate</h1>
   <div id="root" class="container"> </div>
-  <script src="{{asset('js/src/Main.js')}}"></script>
+  <script src="../js/app.js"></script>
 </body>
 
 </html>
