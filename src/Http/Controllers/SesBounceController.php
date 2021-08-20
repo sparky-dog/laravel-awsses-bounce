@@ -78,7 +78,7 @@ class SesBounceController extends Controller
             $data=null;
             $statusCode = 200;
 
-            if ($request['email']['destination'] )
+            if (null !== @$request['email']['destination'] )
             {
                 $bounce = AwsBouceList::firstOrNew(['email' => $request['mail']['destination']]);
                 $bounce->email = $request['mail']['destination'][0];
@@ -88,7 +88,7 @@ class SesBounceController extends Controller
                 $data['status'] = 'Created';
             }
 
-            if ($request['Type'] == "SubscriptionConfirmation" )
+            if (@$request['Type'] == "SubscriptionConfirmation" )
             {
                 Log::info("AWS SES Subscription Link:" . $request['SubscribeURL']);
                 $headers = [
