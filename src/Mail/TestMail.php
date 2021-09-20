@@ -1,6 +1,6 @@
 <?php
 
-namespace Fligno\SesBounce\Mail;
+namespace Fligno\SesBounce\Src\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

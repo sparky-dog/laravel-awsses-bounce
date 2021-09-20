@@ -1,6 +1,6 @@
 <?php
 
-namespace Fligno\SesBounce\Models;
+namespace Fligno\SesBounce\Src\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

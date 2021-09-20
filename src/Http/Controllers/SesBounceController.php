@@ -1,22 +1,23 @@
 <?php
-namespace Fligno\SesBounce\Http\Controllers;
-use App\Http\Controllers\Controller;
+namespace Fligno\SesBounce\Src\Http\Controllers;
+
+use Fligno\SesBounce\Src\Http\Controllers\Controller;
 use Carbon\Traits\Test;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
+use DB;
+use Mail;
 
-use Fligno\SesBounce\Models\AwsBouceList;
-use Fligno\SesBounce\Mail\TestMail;
-use Illuminate\Support\Facades\Log;
+use Fligno\SesBounce\Src\Models\AwsBouceList;
+use Fligno\SesBounce\Src\Mail\TestMail;
+use Log;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\BadResponseException;
 
-use Fligno\SesBounce\Traits\Sendable;
+use Fligno\SesBounce\Src\Traits\Sendable;
 
 class SesBounceController extends Controller
 {
@@ -33,10 +34,10 @@ class SesBounceController extends Controller
         $request = ($_request->all() == null ?  json_decode($_request->getContent(), true) : $_request->all());
 
         // check if API is on production
-        if (env('APP_ENV') == 'local' ) return response(["status"=>"App in production"], 422);
+        //if (env('APP_ENV') == 'local' ) return response(["status"=>"App in production"], 422);
 
-        if($request){
-            Mail::to($request['email'])->send(new TestMail());
+        if(!$request){
+            Mail::to('bagaresnilo93@gmail.com')->send(new TestMail());
             $data['status'] = "Ok";
             $statusCode = 200;
         }else{
