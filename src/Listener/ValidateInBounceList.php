@@ -21,9 +21,10 @@ class ValidateInBounceList
             $bounce = AwsBouceList::where('email',$email)->first();
             if ($bounce)
             {
+                AwsBouceList::where('id',$bounce->id)->update(['send_count'=>$bounce->send_count + 1]);
                 Log::info("Black listed email: " .$email . ". Email cancelled!");
-                die ('Email Blacklisted');
-                throw new MailCancelled();
+               // die ('Email Blacklisted');
+               return false;
             }
         }
     }
