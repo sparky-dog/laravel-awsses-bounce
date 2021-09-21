@@ -13,6 +13,8 @@ class AwsBouceList extends Model
     protected $fillable = [
         'email',
         'source_ip',
+        'status',
+        'code'
     ];
 
 }
