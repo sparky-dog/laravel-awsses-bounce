@@ -32,6 +32,12 @@ class SesBounceServiceProvider extends ServiceProvider
             __DIR__ . '/resources/webpack.mix.js' => base_path('/webpack.mix.js'),
             ]
             , 'sesbounce');
+        $this->commands([
+           
+               
+                Console\Commands\SesBounceComponent::class
+    
+            ]);
     }
 
     /**
