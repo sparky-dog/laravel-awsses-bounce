@@ -1,5 +1,5 @@
 <?php
-Route::get('/welcome', function(){
+Route::get('/sesbounce', function(){
     return view('SesBounce::welcome');
 });
 

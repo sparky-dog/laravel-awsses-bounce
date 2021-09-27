@@ -1,10 +1,10 @@
 <?php
 
-namespace Fligno\SesBounce;
+namespace Fligno\SesBounce\Src;
 
 use Illuminate\Support\ServiceProvider;
-use Fligno\SesBounce\Providers\RouteServiceProvider;
-use Fligno\SesBounce\Providers\EmailEventServiceProvider;
+use Fligno\SesBounce\Src\Providers\RouteServiceProvider;
+use Fligno\SesBounce\Src\Providers\EmailEventServiceProvider;
 
 class SesBounceServiceProvider extends ServiceProvider
 {
@@ -32,6 +32,12 @@ class SesBounceServiceProvider extends ServiceProvider
             __DIR__ . '/resources/webpack.mix.js' => base_path('/webpack.mix.js'),
             ]
             , 'sesbounce');
+        $this->commands([
+           
+               
+                Console\Commands\SesBounceComponent::class
+    
+            ]);
     }
 
     /**

@@ -1,9 +1,9 @@
 <?php
 
-namespace Fligno\SesBounce\Providers;
+namespace Fligno\SesBounce\Src\Providers;
 
 use Illuminate\Mail\Events\MessageSending;
-use Fligno\SesBounce\Listener\ValidateInBounceList;
+use Fligno\SesBounce\Src\Listener\ValidateInBounceList;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EmailEventServiceProvider extends ServiceProvider

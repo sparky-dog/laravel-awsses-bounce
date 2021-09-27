@@ -1,10 +1,10 @@
 <?php
-namespace Fligno\SesBounce\Traits;
+namespace Fligno\SesBounce\Src\Traits;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
-use Fligno\SesBounce\Models\AwsBouceList;
-use Fligno\SesBounce\Mail\TestMail;
+use Fligno\SesBounce\Src\Models\AwsBouceList;
+use Fligno\SesBounce\Src\Mail\TestMail;
 use Illuminate\Support\Facades\Log;
 
 use GuzzleHttp\Client;

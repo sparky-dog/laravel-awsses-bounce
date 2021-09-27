@@ -1,6 +1,6 @@
 <?php
 
-namespace Fligno\SesBounce\Models;
+namespace Fligno\SesBounce\Src\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,6 +13,8 @@ class AwsBouceList extends Model
     protected $fillable = [
         'email',
         'source_ip',
+        'status',
+        'code'
     ];
 
 }

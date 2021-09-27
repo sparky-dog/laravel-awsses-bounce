@@ -1,22 +1,23 @@
 <?php
-namespace Fligno\SesBounce\Http\Controllers;
-use App\Http\Controllers\Controller;
+namespace Fligno\SesBounce\Src\Http\Controllers;
+
+use Fligno\SesBounce\Src\Http\Controllers\Controller;
 use Carbon\Traits\Test;
 use Illuminate\Http\Request;
+use Fligno\Auth\Src\Models\NewsLetter;
+use DB;
+use Mail;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
-
-use Fligno\SesBounce\Models\AwsBouceList;
-use Fligno\SesBounce\Mail\TestMail;
-use Illuminate\Support\Facades\Log;
+use Fligno\SesBounce\Src\Models\AwsBouceList;
+use Fligno\SesBounce\Src\Mail\TestMail;
+use Log;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\BadResponseException;
 
-use Fligno\SesBounce\Traits\Sendable;
+use Fligno\SesBounce\Src\Traits\Sendable;
 
 class SesBounceController extends Controller
 {
@@ -35,7 +36,7 @@ class SesBounceController extends Controller
         // check if API is on production
         if (env('APP_ENV') == 'local' ) return response(["status"=>"App in production"], 422);
 
-        if($request){
+        if(!$request){
             Mail::to($request['email'])->send(new TestMail());
             $data['status'] = "Ok";
             $statusCode = 200;
@@ -51,13 +52,7 @@ class SesBounceController extends Controller
         return response($emails);
     }
 
-    public function edit(Request $request){
-        // grab the email
-        $email = AwsBouceList::query()->find($request->id)->first();
-        //Block or Unblock Complaints/Email
-        $affected_rows = DB::table('aws_bouce_lists')->where('id', $request->id)->delete();
-        return response([$email]);
-    }
+  
 
     /**
      * Store a newly created resource in storage.
@@ -83,7 +78,10 @@ class SesBounceController extends Controller
                 $bounce = AwsBouceList::firstOrNew(['email' => $request['mail']['destination']]);
                 $bounce->email = $request['mail']['destination'][0];
                 $bounce->source_ip = $request['mail']['sourceIp'];
+                $bounce->status = $request['bounce']['bouncedRecipients']['status'];
+                $bounce->code =  $request['bounce']['bouncedRecipients']['diagnosticCode'];
                 $bounce->save();
+
                 $statusCode = 201;
                 $data['status'] = 'Created';
             }
@@ -120,5 +118,19 @@ class SesBounceController extends Controller
 
     }
 
+ public function Block(Request $request)
+ {
 
+        $contact = NewsLetter::find($request->id);
+        AwsBouceList::create(['email'=>$contact->email,
+        'source_ip' =>request()->ip(),
+        'code' => 'blocked by admin' ]);
+        return $this->get();
+ }
+
+ public function Unblock($id)
+ {
+     AwsBouceList::where('id',$id)->delete();
+     return $this->get();
+ }
 }
