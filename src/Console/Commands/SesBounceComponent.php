@@ -40,12 +40,12 @@ class SesBounceComponent extends Command
         //import
         $components = 'import SesBounce from "../../../../../../SesBounce/src/resources/js/admin/pages/sesbounce"';
         $config = "Fligno/Auth/src/resources/js/admin/routes/index.js";
-        $pointer = "//SesBounce";
+        $pointer = "//SesBounceImport";
         $this->writeSesbounce($components,$config,$pointer);
         //Route
         $components = '{path:"/sesbounce",exact:true,component:()=> <SesBounce/>},';
         $config = "Fligno/Auth/src/resources/js/admin/routes/index.js";
-        $pointer = "//SesbounceRoute";
+        $pointer = "//SesBounceRoute";
         $this->writeSesbounce($components,$config,$pointer);
 
         //Sidebar
@@ -58,7 +58,7 @@ class SesBounceComponent extends Command
             </NavLink>
         </MenuItem>';
         $config = "Fligno/Auth/src/resources/js/admin/components/Sidebar.js";
-        $pointer = "//Sesbounce";
+        $pointer = "//SesBounce";
         $this->writeSesbounce($components,$config,$pointer);
 
 
