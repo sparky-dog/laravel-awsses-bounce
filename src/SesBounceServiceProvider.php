@@ -1,10 +1,10 @@
 <?php
 
-namespace Fligno\SesBounce;
+namespace Fligno\SesBounce\Src;
 
 use Illuminate\Support\ServiceProvider;
-use Fligno\SesBounce\Providers\RouteServiceProvider;
-use Fligno\SesBounce\Providers\EmailEventServiceProvider;
+use Fligno\SesBounce\Src\Providers\RouteServiceProvider;
+use Fligno\SesBounce\Src\Providers\EmailEventServiceProvider;
 
 class SesBounceServiceProvider extends ServiceProvider
 {
@@ -23,6 +23,21 @@ class SesBounceServiceProvider extends ServiceProvider
 
         // Load migrations
         $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+
+        //Load the views
+        $this->publishes([
+            __DIR__.'/resources/js' => resource_path('/js'),
+            __DIR__.'/resources/views/gui.blade.php' => resource_path('/views/gui.blade.php'), 
+            __DIR__ . '/resources/package.json' => base_path('/package.json'),
+            __DIR__ . '/resources/webpack.mix.js' => base_path('/webpack.mix.js'),
+            ]
+            , 'sesbounce');
+        $this->commands([
+           
+               
+                Console\Commands\SesBounceComponent::class
+    
+            ]);
     }
 
     /**
@@ -36,10 +51,4 @@ class SesBounceServiceProvider extends ServiceProvider
         $this->app->register(EmailEventServiceProvider::class);
     }
 
-    /**
-     * Register factories.
-     *
-     * @param  string  $path
-     * @return void
-     */
 }

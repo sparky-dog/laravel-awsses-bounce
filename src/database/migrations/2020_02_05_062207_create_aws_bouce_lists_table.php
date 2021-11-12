@@ -17,6 +17,9 @@ class CreateAwsBouceListsTable extends Migration
             $table->bigIncrements('id');
             $table->string('email');
             $table->string('source_ip');
+            $table->string('status')->nullable();
+            $table->string('code')->nullable();
+            $table->integer('send_count')->default(0);
             $table->timestamps();
         });
     }

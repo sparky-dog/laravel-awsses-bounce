@@ -1,6 +1,6 @@
 <?php
 
-namespace Fligno\SesBounce\Mail;
+namespace Fligno\SesBounce\Src\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -29,6 +29,6 @@ class TestMail extends Mailable
     public function build()
     {
         return $this->view('SesBounce::testmail')
-        ->subject('Test Mail');;
+        ->subject('Test Mail');
     }
 }

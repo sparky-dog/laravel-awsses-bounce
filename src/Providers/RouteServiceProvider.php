@@ -1,6 +1,6 @@
 <?php
 
-namespace Fligno\SesBounce\Providers;
+namespace Fligno\SesBounce\Src\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -14,7 +14,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $namespace = 'Fligno\SesBounce\Http\Controllers';
+    protected $namespace = 'Fligno\SesBounce\Src\Http\Controllers';
 
     /**
      * Define your route model bindings, pattern filters, etc.
