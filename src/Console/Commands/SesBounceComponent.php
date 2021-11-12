@@ -40,7 +40,7 @@ class SesBounceComponent extends Command
         //import
         $components = 'import SesBounce from "../../../../../../SesBounce/src/resources/js/admin/pages/sesbounce"';
         $config = "Fligno/Auth/src/resources/js/admin/routes/index.js";
-        $pointer = "//SesBounce";
+        $pointer = "//SesBounceImport";
         $this->writeSesbounce($components,$config,$pointer);
         //Route
         $components = '{path:"/sesbounce",exact:true,component:()=> <SesBounce/>},';
