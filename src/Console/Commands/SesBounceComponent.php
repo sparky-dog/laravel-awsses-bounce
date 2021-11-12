@@ -11,14 +11,14 @@ class SesBounceComponent extends Command
      *
      * @var string
      */
-    protected $signature = 'sesbounce:component';
+    protected $signature = 'sesbounce:publish';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'This will publish sesbounce component';
 
     /**
      * Create a new command instance.
@@ -45,7 +45,7 @@ class SesBounceComponent extends Command
         //Route
         $components = '{path:"/sesbounce",exact:true,component:()=> <SesBounce/>},';
         $config = "Fligno/Auth/src/resources/js/admin/routes/index.js";
-        $pointer = "//SesbounceRoute";
+        $pointer = "//SesBounceRoute";
         $this->writeSesbounce($components,$config,$pointer);
 
         //Sidebar
@@ -58,7 +58,7 @@ class SesBounceComponent extends Command
             </NavLink>
         </MenuItem>';
         $config = "Fligno/Auth/src/resources/js/admin/components/Sidebar.js";
-        $pointer = "//Sesbounce";
+        $pointer = "//SesBounce";
         $this->writeSesbounce($components,$config,$pointer);
 
 
