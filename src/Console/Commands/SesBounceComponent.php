@@ -42,6 +42,7 @@ class SesBounceComponent extends Command
         $config = "Fligno/Auth/src/resources/js/admin/routes/index.js";
         $pointer = "//SesBounceImport";
         $this->writeSesbounce($components,$config,$pointer);
+
         //Route
         $components = '{path:"/sesbounce",exact:true,component:()=> <SesBounce/>},';
         $config = "Fligno/Auth/src/resources/js/admin/routes/index.js";
@@ -61,9 +62,39 @@ class SesBounceComponent extends Command
         $pointer = "//SesBounce";
         $this->writeSesbounce($components,$config,$pointer);
 
+        //import
+        $components = 'import InviteUser from "../../../../../../SesBounce/src/resources/js/admin/pages/inviteuser"';
+        $config = "Fligno/Auth/src/resources/js/admin/routes/index.js";
+        $pointer = "//InviteUserImport";
+        $this->writeSesbounce($components,$config,$pointer);
+
+        //Route
+        $components = '{path:"/invite-user",exact:true,component:()=> <InviteUser/>},';
+        $config = "Fligno/Auth/src/resources/js/admin/routes/index.js";
+        $pointer = "//InviteUserRoute";
+        $this->writeSesbounce($components,$config,$pointer);
+
+        //Sidebar
+        $components = '<MenuItem>
+        <NavLink
+              to="/invite-user"
+              activeClassName="font-bold text-white"
+              className="flex items-center ml-3 py-1"
+            ><span className="mr-2"><RiMailForbidLine/></span>Invite User
+            </NavLink>
+        </MenuItem>';
+        $config = "Fligno/Auth/src/resources/js/admin/components/Sidebar.js";
+        $pointer = "//InviteUser";
+        $this->writeSesbounce($components,$config,$pointer);
+
 
         $this->info("Sesbounce successfully rendered");
     }
+
+
+
+
+
 
     function writeSesbounce($components,$config,$pointer)
     {
