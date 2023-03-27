@@ -1,5 +1,5 @@
 <?php
-namespace Fligno\SesBounce\Src\Http\Controllers;
+namespace Project\SesBounce\Src\Http\Controllers;
 
 use Fligno\SesBounce\Src\Http\Controllers\Controller;
 use Carbon\Traits\Test;
