@@ -14,8 +14,8 @@
     ],
     "autoload": {
      "psr-4": {
-       "Fligno\\SesBounce\\Src\\": "Fligno/SesBounce/src/",
-       "Fligno\\SesBounce\\Tests\\": "test",
+       "Project\\SesBounce\\Src\\": "Project/SesBounce/src/",
+       "Project\\SesBounce\\Tests\\": "test",
         "Src\\" : "src/"
      }
     },
